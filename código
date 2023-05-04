@@ -1,0 +1,98 @@
+#include <iostream>
+using namespace std;
+
+int potencia (int n){
+    int total = 1;
+    for (int i = 0; i < n; i++)
+        total *= 2;
+    return total;
+}
+
+int bin_dec (string n){
+    int soma = 0;
+    int vet [n.length()];
+    
+    for (int i = 0; i < n.length(); i++){
+        if (n [i] == '1')
+            vet [i] = 1;
+        else
+            vet [i] = 0;
+    }
+    
+    int j = n.length() - 1;
+    for (int i = 0; i < n.length(); i++){
+        soma += (potencia(i) * vet [j]);
+        j--;
+    }
+    return soma;
+}
+
+void dec_bin (int n){
+    
+    int resto, divisao;
+    
+    divisao = n;
+    int j = 0;
+    
+    while (divisao != 0 && divisao != 1 ){
+        resto = divisao % 2;
+        divisao = divisao / 2;
+        j++;
+    }
+    int vet [j];
+    
+    divisao = n;
+    int x = 0;
+    while (divisao != 0 && divisao != 1 ){
+        resto = divisao % 2;
+        divisao = divisao / 2;
+        vet [x] = resto;
+        x++;
+    }
+    vet [x] = divisao;
+    
+    for (int i = j; i >= 0; i--){
+        cout << vet [i];
+    }    
+
+}
+
+int main()
+{
+    int op;
+    string binario;
+    int decimal;
+    
+    do {
+        system ("clear");
+        cout << "[1] DECIMAL PARA BINÁRIO" << endl
+             << "[2] BINÁRIO PARA DECIMAL" << endl
+             << "[3] SAIR" << endl;
+        cin >> op;
+        
+        switch (op) {
+            case 1:
+                system ("clear");
+                cout << "DECIMAL: ";
+                cin >> decimal;
+                cout << "BINÁRIO: ";
+                dec_bin (decimal);
+                cout << endl;
+                break;
+    
+            case 2:
+                system ("clear");
+                cout << "BINÁRIO: ";
+                cin >> binario;
+                cout << "DECIMAL: " << bin_dec (binario);
+                break;
+        
+            default:
+                system ("clear");
+                cout << "BYE BYE!!!";
+                break;
+        }
+        cin.ignore().get();
+    } while (op != 3);
+    return 0;
+}
